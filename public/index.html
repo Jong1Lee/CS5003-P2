@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Toggle Active Classes</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      h1 {
+        text-align: center;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .horizontal-bar {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        max-width: 600px;
+        margin-top: 20px;
+        font-size: x-large;
+        color: rgb(37, 37, 37);
+        border-bottom: 1px solid black;
+      }
+
+      .option {
+        padding: 10px;
+        cursor: pointer;
+      }
+
+      .option.active {
+        border: 3px solid grey;
+      }
+
+      .square-box {
+        display: none;
+        width: 90%;
+        height: 550px;
+        margin-top: 20px;
+        border: 1px solid black;
+      }
+
+      .square-box.active {
+        display: block;
+      }
+
+      .square-box.maker {
+        border: 10px solid lightblue;
+      }
+
+      .square-box.browser {
+        border: 10px solid lightgreen;
+      }
+
+      .square-box.component {
+        border: 10px solid lightpink;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      .containerMaker {
+        display: flex;
+        flex-direction: row;
+      }
+
+      .flex-makerBox {
+        display: flex;
+        flex-wrap: nowrap;
+        border: 1px solid black;
+        width: 100%;
+        height: 530px;
+      }
+
+      .post-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;
+        width: 100%;
+      }
+
+      .post-box input {
+        margin-bottom: 10px;
+        padding: 5px;
+        width: 100%;
+      }
+
+      .post-box button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        width: 100%;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+
+      .emojiBox {
+        display: grid;
+        width: 100%;
+        height: 490px;
+        margin-top: 30px;
+        margin-right: 10px;
+        border: 1px solid black;
+      }
+
+      .item1 {
+        grid-column: 1;
+        grid-row: 1 / span 2;
+      }
+      .item2 {
+        grid-column: 2;
+        grid-row: 1 / span 2;
+      }
+      .item3 {
+        grid-column: 3;
+        grid-row: 1 / span 2;
+      }
+      .item4 {
+        grid-column: 1 / span 3;
+        grid-row: 3;
+      }
+
+      .area {
+        border: 1px solid rgb(123, 129, 255);
+        text-align: center;
+      }
+
+      .area img {
+        margin-top: 50px;
+        width: 50px;
+        height: 50px;
+        cursor: pointer;
+        border: 1px solid rgb(202, 202, 202);
+      }
+
+      #preview-box {
+        width: 300px;
+        height: 300px;
+        border: 3px solid black;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 20px;
+      }
+
+      .preview-area {
+        padding: 30px;
+      }
+
+      .container-browser {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 530px;
+        border: 1px solid rgb(4, 70, 0);
+      }
+
+      .browser-emoji {
+        display: flex;
+        width: 100%;
+        border: 1px solid black;
+        padding: 10px;
+      }
+
+      .browser-input {
+        width: 100%;
+        padding: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Emojitars</h1>
+    <div class="container">
+      <div class="horizontal-bar">
+        <div class="option active" id="maker">Maker</div>
+        <div class="option" id="browser">Browser</div>
+        <div class="option" id="component">Component</div>
+      </div>
+      <div class="square-box maker active" id="maker-box">
+        <!-- Content for Maker option -->
+        <form id="upload-form">
+          <div class="containerMaker">
+            <div class="flex-makerBox">
+              <div class="preview-area">
+                <div id="preview-box"></div>
+
+                <div class="post-box">
+                  <input
+                    type="text"
+                    name="emojitar_id"
+                    id="emojitar_id"
+                    placeholder="Emojitar ID"
+                  />
+                  <input
+                    type="text"
+                    name="description"
+                    id="description"
+                    placeholder="Description"
+                  />
+                  <input
+                    type="text"
+                    name="username"
+                    id="username"
+                    placeholder="Username"
+                  />
+                  <button type="submit" id="post-btn">Post</button>
+                </div>
+              </div>
+
+              <div class="emojiBox">
+                <div class="area face-area item1">
+                  <h3>Face</h3>
+                  <img src="/images/face-grey.png" alt="face1" />
+                  <img src="/images/face-pink-rosy.png" alt="face2" />
+                  <img src="/images/face-yellow.png" alt="face3" />
+                </div>
+                <div class="area eye-area item2">
+                  <h3>Eyes</h3>
+                  <img src="/images/eyes-pale-blue.png" alt="eyes1" />
+                  <img src="/images/eyes-smiley-pale-blue.png" alt="eyes2" />
+                  <img src="/images/eyes-smiley.png" alt="eyes3" />
+                  <img src="/images/eyes.png" alt="eyes4" />
+                </div>
+                <div class="area mouth-area item3">
+                  <h3>Mouth</h3>
+                  <img src="/images/mouth-grin-pink.png" alt="mouth1" />
+                  <img src="/images/mouth-grin.png" alt="mouth2" />
+                  <img src="/images/mouth-smile.png" alt="mouth3" />
+                </div>
+                <div class="area hair-area item4">
+                  <h3>Hair</h3>
+                  <img src="/images/hair-bob-brown.png" alt="hair1" />
+                  <img src="/images/hair-bowl-brown.png" alt="hair2" />
+                  <img src="/images/hair-curly-brown.png" alt="hair3" />
+                  <img src="/images/hair-curly-ginger.png" alt="hair4" />
+                  <img src="/images/hair-pigtails-brown.png" alt="hair5" />
+                  <img src="/images/hair-short-brown.png" alt="hair6" />
+                  <img src="/images/hair-short-teal.png" alt="hair7" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="square-box browser" id="browser-box">
+        <!-- Content for Browser option -->
+        <div class="container-browser">
+          <div class="results-container"></div>
+        </div>
+      </div>
+
+      <div class="square-box component" id="component-box">
+        <!-- Content for Component option -->
+      </div>
+    </div>
+
+    <script>
+      //Maker Page
+      // Get all the option elements
+      const options = document.querySelectorAll(".option");
+
+      // Add a click event listener to each option
+      options.forEach((option) => {
+        option.addEventListener("click", () => {
+          // Remove the active class from all options and square boxes
+          options.forEach((option) => option.classList.remove("active"));
+          const squareBoxes = document.querySelectorAll(".square-box");
+          squareBoxes.forEach((squareBox) =>
+            squareBox.classList.remove("active")
+          );
+
+          // Add the active class to the clicked option and corresponding square box
+          option.classList.add("active");
+          const correspondingSquareBox = document.getElementById(
+            `${option.id}-box`
+          );
+          correspondingSquareBox.classList.add("active");
+        });
+      });
+
+      // Select all the necessary elements
+      const faceImg = document.createElement("img");
+      const eyesImg = document.createElement("img");
+      const mouthImg = document.createElement("img");
+      const hairImg = document.createElement("img");
+      const previewBox = document.getElementById("preview-box");
+      const faceContainer = document.createElement("div");
+      const form = document.querySelector("#upload-form");
+
+      // Function to update the preview box with the selected images
+      function updatePreviewBox() {
+        // Clear any previous content in the preview box
+        previewBox.innerHTML = "";
+
+        // Create a container for the face, eyes, and mouth images
+        faceContainer.style.position = "relative";
+
+        // Add the face image to the container and position it at the bottom
+        faceContainer.appendChild(faceImg);
+
+        // Add the eyes and mouth images to the container and position them in the center
+        eyesImg.style.position = "absolute";
+        eyesImg.style.top = "50%";
+        eyesImg.style.left = "50%";
+        eyesImg.style.transform = "translate(-50%, -50%)";
+        faceContainer.appendChild(eyesImg);
+
+        mouthImg.style.position = "absolute";
+        mouthImg.style.top = "50%";
+        mouthImg.style.left = "50%";
+        mouthImg.style.transform = "translate(-50%, -50%)";
+        faceContainer.appendChild(mouthImg);
+
+        // Add the hair image to the preview box and position it at the top
+        hairImg.style.position = "absolute";
+        hairImg.style.top = "50%";
+        hairImg.style.left = "50%";
+        hairImg.style.transform = "translate(-50%, -50%)";
+        faceContainer.appendChild(hairImg);
+
+        // Add the face container to the preview box
+        previewBox.appendChild(faceContainer);
+      }
+
+      // Attach click event listeners to all the image elements
+      const faceImages = document.querySelectorAll(".face-area img");
+      faceImages.forEach((img) => {
+        img.addEventListener("click", () => {
+          faceImg.src = img.src;
+          updatePreviewBox();
+        });
+      });
+
+      const eyesImages = document.querySelectorAll(".eye-area img");
+      eyesImages.forEach((img) => {
+        img.addEventListener("click", () => {
+          eyesImg.src = img.src;
+          updatePreviewBox();
+        });
+      });
+
+      const mouthImages = document.querySelectorAll(".mouth-area img");
+      mouthImages.forEach((img) => {
+        img.addEventListener("click", () => {
+          mouthImg.src = img.src;
+          updatePreviewBox();
+        });
+      });
+
+      const hairImages = document.querySelectorAll(".hair-area img");
+      hairImages.forEach((img) => {
+        img.addEventListener("click", () => {
+          hairImg.src = img.src;
+          updatePreviewBox();
+        });
+      });
+
+      //Browser Page
+      //Get the required elements
+      const postBtn = document.getElementById("post-btn");
+      const browserEmoji = document.getElementById("browser-emoji");
+      const browserInput = document.getElementById("browser-input");
+      const resultsContainer = document.querySelector(".results-container");
+
+
+      // Add an event listener to the Post button
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const emojitarId = document.getElementById("emojitar_id").value;
+        const description = document.getElementById("description").value;
+        const username = document.getElementById("username").value;
+
+        alert(`Successfully uploaded ${emojitarId}.png!`);
+
+
+        const formData = new FormData();
+        formData.append("id", emojitarId);
+        formData.append("description", description);
+        formData.append("username", username);
+        formData.append("image", faceContainer);
+
+        fetch("/upload", {
+          method: "POST",
+          body: formData,
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+
+
+            const resultHTML =
+              data.image +
+              "<br>" +
+              `<h3>Emojitar ID: ${data.id}</h3>` +
+              "<br>" +
+              `<h3>Description: ${data.description}</h3>` +
+              "<br>" +
+              `<h3>Username: ${data.username}</h3>`;
+
+            const resultElement = document.createElement("div");
+            resultElement.classList.add("result");
+            resultElement.innerHTML = resultHTML;
+            resultsContainer.appendChild(resultElement);
+          })
+          .catch((error) => console.error(error));
+      });
+    </script>
+  </body>
+</html>
